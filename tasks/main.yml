@@ -1,0 +1,18 @@
+---
+- include: redhat.yml
+  when: ansible_os_family == "RedHat"
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: remove public ntp servers
+  lineinfile: dest=/etc/ntp.conf state=absent regexp="^server.*\.ntp\.org.*$"
+  notify: restart ntp server
+
+- name: add custom ntp servers
+  lineinfile: dest=/etc/ntp.conf state=present line="server {{item}} iburst"
+  with_items: "{{ntp_servers}}"
+  notify: restart ntpd server
+
+- name: start ntp server
+  service: name=ntpd enabled=yes state=started
