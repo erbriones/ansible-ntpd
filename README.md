@@ -1,6 +1,8 @@
 ansible-ntpd
 ============
 
+[![Build Status](https://travis-ci.org/erbriones/ansible-ntpd.svg?branch=master)](https://travis-ci.org/erbriones/ansible-ntpd)
+
 Install and configure ntpd with specific ntp servers.
 
 Example Playbook
