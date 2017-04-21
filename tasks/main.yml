@@ -7,7 +7,7 @@
 
 - name: remove public ntp servers
   lineinfile: dest=/etc/ntp.conf state=absent regexp="^server.*\.ntp\.org.*$"
-  notify: restart ntp server
+  notify: restart ntpd server
 
 - name: add custom ntp servers
   lineinfile: dest=/etc/ntp.conf state=present line="server {{item}} iburst"
